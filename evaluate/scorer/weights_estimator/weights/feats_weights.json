@@ -1,0 +1,22 @@
+{
+    "Animacy": 2,
+    "Case": 8,
+    "Gender": 3,
+    "Number": 2,
+    "Degree": 3,
+    "Aspect": 2,
+    "Mood": 3,
+    "Tense": 3,
+    "VerbForm": 4,
+    "Voice": 3,
+    "Person": 3,
+    "PronType": 6,
+    "Variant": 1,
+    "NumType": 1,
+    "Poss": 1,
+    "Reflex": 1,
+    "Foreign": 1,
+    "Polarity": 1,
+    "Typo": 1,
+    "Abbr": 1
+}
