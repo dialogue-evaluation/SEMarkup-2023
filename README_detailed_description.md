@@ -5,11 +5,11 @@
 1. [Dataset](#dataset)
 2. [Corpus Markup](#corpus-markup)
 3. [The conversion of the Compreno markup in the UD format](#the-conversion-of-the-compreno-markup-in-the-ud-format)<br />
-3.1 [Tokenization ](#tokenization )<br />
+3.1 [Tokenization](#tokenization )<br />
 3.2 [The conversion of parts of speech and grammatical features](#the-conversion-of-parts-of-speech-and-grammatical-features)<br />
 3.3 [The conversion of the syntactic heads](#the-conversion-of-the-syntactic-heads)<br />
 3.4 [The conversion of the dependent constituents](#the-conversion-of-the-dependent-constituents)<br />
-4. [Основные возникающие проблемы и принятые решения](#основные-возникающие-проблемы-и-принятые-решения)
+4. [Main problems and their solutions](#main-problems-and-their-solutions)
 
 # Dataset
 Our corpus consists of news from the [NewsRu.Com](https://abbyyihq-my.sharepoint.com/:u:/g/personal/vladimir_dobrovolskiy_abbyy_com/EfDkvviTivNCjWVkL7WhfeIBSnZdz0yRhssDbGOjHm2kpA?e=CiDK8x) dataset, created during building the [RuCoCo](https://github.com/vdobrovolskii/rucoco) corpus &ndash; the corpus with the coreference annotation.
