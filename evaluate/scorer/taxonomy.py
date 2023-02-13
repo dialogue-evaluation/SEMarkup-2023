@@ -32,13 +32,13 @@ class Taxonomy:
         # Semclass tricks.
         semclass_counter = Counter(taxonomy_df["Name"])
         for i, (semclass, count) in enumerate(semclass_counter.items()):
+            # All taxonomy semclasses (except the most frequent one) must be unique.
             if i != 0:
-                assert(count == 1)
-
+                assert count == 1
         masked_semclass = semclass_counter.most_common(1)[0]
         self.semclass_to_idx = {value: index
                                 for index, value in enumerate(taxonomy_df["Name"])
-                                if value is not masked_semclass}
+                                if value not in masked_semclass}
 
     @staticmethod
     def load(taxonomy_file_csv: str) -> pd.DataFrame:
