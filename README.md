@@ -58,7 +58,7 @@ Besides labelling dependency heads, semantic slots and classes, we suggest that 
 
 [Train dataset](train.conllu)
 
-We have created and published the first open corpus for Russian which contains 3-level markup:
+As the train dataset we suggest using the first open [corpus](https://github.com/compreno-semantics/compreno-corpus) for Russian which contains 3-level markup:
 
 - Morphology (UD)
 - Syntax (UD)
@@ -66,7 +66,7 @@ We have created and published the first open corpus for Russian which contains 3
 
 We believe that simultaneous markup of these three language levels is a challenge even more complicated than [Dialogue GramEval-2020 competition](https://github.com/dialogue-evaluation/GramEval2020), where 2 language levels were introduced, morphology and syntax.
 <br />
-The dataset for this task is based on the news texts of the NewsRU site. It was labelled automatically by the Compreno system. This markup was checked manually and automatically converted to the UD format. The conversion was also partially hand-checked.
+The details about the dataset and its creation can be read in the [corpus repository](https://github.com/compreno-semantics/compreno-corpus). 
 
 ## Important links
 - [Codalab BASE track](https://codalab.lisn.upsaclay.fr/competitions/10472)
@@ -74,9 +74,8 @@ The dataset for this task is based on the news texts of the NewsRU site. It was 
 - [Our telegram chat](https://t.me/+58wXWNPgUt8yZDgy)
 
 ## Tagsets and other useful information
-- [Detailed Description](README_detailed_description.md) – a detailed description of the corpus, formats and conversion features
 - [Semantic Slots](tagsets/semantic_slots.xlsx) – a list of semantic slots with their unsimplified counterparts
-- [Semantic Classes](tagsets/semantic_classes.csv) – a list of semantic classes (unsimplified) with their hyperonyms which were used in the simplified version of the format
+- [Semantic Classes](tagsets/semantic_classes.csv) – a list of hyperonym semantic classes which were used in the simplified version of the format
 - [UD Morphology tagset](https://github.com/dialogue-evaluation/GramEval2020/blob/master/UDtagset/UD-Russian_tagset.md) - UD morphological tagset: PoS-tags and grammatical features (the link is provided for the tagset published in GramEval-2020 competition) 
 - [UD Dependency relations (syntax)](tagsets/syntax.md) - UD dependency relations
 - [Acknowledgements](acknowledgements.md) – project participants
@@ -88,9 +87,9 @@ The dataset for this task is based on the news texts of the NewsRU site. It was 
 - 1 April - paper submission deadline.
 
 ## Organizers
-- Maria Petrova
+- Maria Petrova (A4 Foundation)
 - Alexandra Ivoylova (RSUH)
-- Ilya Bayuk
+- Ilya Bayuk (A4 Foundation)
 - Darya Dyachkova (RSUH)
 - Mariia Michurina (RSUH)
 - Angela Shumilova (RSUH)
