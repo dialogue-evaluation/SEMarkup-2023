@@ -67,6 +67,7 @@
 - [Semantic Classes](tagsets/semantic_classes.csv) – список используемых в разметке семантических классов
 - [UD Morphology tagset](https://github.com/dialogue-evaluation/GramEval2020/blob/master/UDtagset/UD-Russian_tagset.md) &ndash; Морфологический тагсет UD: части речи и грамматические категории (мы используем ссылку на тагсет, опубликованный на соревновании GramEval-2020)
 - [UD Dependency relations (syntax)](tagsets/syntax.md) &ndash; синтаксические связи UD
+- [Полное описание датасета и его формата]https://github.com/compreno-semantics
 - [Acknowledgements](acknowledgements.md) – участники проекта
 
 ## График проведения соревнования:
