@@ -1,4 +1,5 @@
 import pandas as pd
+from collections import Counter
 
 from typing import Tuple, List, Dict, Any
 
@@ -28,7 +29,16 @@ class Taxonomy:
         taxonomy_df = Taxonomy.load(taxonomy_file)
         self.parents = Taxonomy.extract_parents(taxonomy_df)
         self.depths = Taxonomy.extract_depths(taxonomy_df)
-        self.semclass_to_idx = enumerate_column_inv(taxonomy_df, "Name")
+        # Semclass tricks.
+        semclass_counter = Counter(taxonomy_df["Name"])
+        for i, (semclass, count) in enumerate(semclass_counter.items()):
+            # All taxonomy semclasses (except the most frequent one) must be unique.
+            if i != 0:
+                assert count == 1
+        masked_semclass = semclass_counter.most_common(1)[0]
+        self.semclass_to_idx = {value: index
+                                for index, value in enumerate(taxonomy_df["Name"])
+                                if value not in masked_semclass}
 
     @staticmethod
     def load(taxonomy_file_csv: str) -> pd.DataFrame:
@@ -39,15 +49,8 @@ class Taxonomy:
                 'ParentID': 'Int64',
                 'Depth': int,
                 'Name': str,
-                'TypeID': int,
-                'IsHyperonym': int
             }
         )
-        # Filter semantic classes.
-        # Now 'Name' contains semantic classes only.
-        taxonomy = taxonomy[taxonomy["TypeID"] == Taxonomy.SEMCLASS_TYPE_ID]
-        # Filter redundant columns.
-        taxonomy = taxonomy[["ID", "ParentID", "Depth", "Name"]]
         return taxonomy
 
     @staticmethod
