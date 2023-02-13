@@ -1,15 +1,17 @@
 
+
 [Русский](README_detailed_description_RU.md)
 
 # Contents
 1. [Dataset](#dataset)
 2. [Corpus Markup](#corpus-markup)
+3. [The Semantic Hierarchy](#the-semantic-hierarchy)
 3. [The conversion of the Compreno markup in the UD format](#the-conversion-of-the-compreno-markup-in-the-ud-format)<br />
-3.1 [Tokenization](#tokenization )<br />
-3.2 [The conversion of parts of speech and grammatical features](#the-conversion-of-parts-of-speech-and-grammatical-features)<br />
-3.3 [The conversion of the syntactic heads](#the-conversion-of-the-syntactic-heads)<br />
-3.4 [The conversion of the dependent constituents](#the-conversion-of-the-dependent-constituents)<br />
-4. [Main problems and their solutions](#main-problems-and-their-solutions)
+4.1 [Tokenization](#tokenization )<br />
+4.2 [The conversion of parts of speech and grammatical features](#the-conversion-of-parts-of-speech-and-grammatical-features)<br />
+4.3 [The conversion of the syntactic heads](#the-conversion-of-the-syntactic-heads)<br />
+4.4 [The conversion of the dependent constituents](#the-conversion-of-the-dependent-constituents)<br />
+5. [Main problems and their solutions](#main-problems-and-their-solutions)
 
 # Dataset
 Our corpus consists of news from the [NewsRu.Com](https://abbyyihq-my.sharepoint.com/:u:/g/personal/vladimir_dobrovolskiy_abbyy_com/EfDkvviTivNCjWVkL7WhfeIBSnZdz0yRhssDbGOjHm2kpA?e=CiDK8x) dataset, created during building the [RuCoCo](https://github.com/vdobrovolskii/rucoco) corpus &ndash; the corpus with the coreference annotation.
@@ -43,7 +45,25 @@ Among the materials proposed for the competition the following data are availabl
 
 
 - full [list of the semantic roles used in the markup](https://github.com/dialogue-evaluation/SEMarkup-2023/blob/main/tagsets/semantic_slots.xlsx) with comments and examples;
-- [table of the correspondences between the lexemes and their hyperonym semantic classes](https://github.com/dialogue-evaluation/SEMarkup-2023/blob/main/tagsets/semantic_classes.csv).
+- [table of hyperonym semantic classes](https://github.com/dialogue-evaluation/SEMarkup-2023/blob/main/tagsets/semantic_classes.csv).
+
+# The Semantic Hierarchy
+
+The [semantic hierarchy](https://int.webcorpora.ru/spring2/semantics/) is organized in the form of the tree, which consists of the semantic classes (SCs) printed in capitals &ndash; the SCs are universal for all languages included in the hierarchy and denote semantic senses common for all languages. The classes can be opened by pressing the Plus sign to the left of the class. 
+
+In the Compreno model, each SC contains lexical classes (LCs) &ndash; lexicon of different languages, which are written in small letters:
+
+![](img/01.png)
+
+Here we have presented a shortened version of the hierarchy: one can see only the hyperonym SCs, which are shown in the generalized version of the semantic markup:
+
+![](img/02.png)
+
+The hyperonym SCs are printed with bold letters in the tree.
+The hierarchy is provided with the search option. One can search for both exact and partial correspondences using the ‘Exact form’ checkbox. The picture below shows the SH tree to the left and the search results to the right. Click on each class in the search results will open the class in the hierarchy tree:
+
+![](img/03.png)
+
 
 # The conversion of the Compreno markup in the UD format
 
