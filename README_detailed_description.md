@@ -53,11 +53,11 @@ The [semantic hierarchy](https://int.webcorpora.ru/spring2/semantics/) is organi
 
 In the Compreno model, each SC contains lexical classes (LCs) &ndash; lexicon of different languages, which are written in small letters:
 
-![](img/sh1.PNG)
+<img src="img/sh1.PNG" width="350"  />
 
 Here we have presented a shortened version of the hierarchy: one can see only the hyperonym SCs, which are shown in the generalized version of the semantic markup:
 
-![](img/sh2.PNG)
+<img src="img/sh2.PNG" width="350"  />
 
 The hyperonym SCs are printed with bold letters in the tree.
 The hierarchy is provided with the search option. One can search for both exact and partial correspondences using the ‘Exact form’ checkbox. The picture below shows the SH tree to the left and the search results to the right. Click on each class in the search results will open the class in the hierarchy tree:
