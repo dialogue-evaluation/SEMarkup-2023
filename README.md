@@ -78,6 +78,7 @@ The details about the dataset and its creation can be read in the [corpus reposi
 - [Semantic Classes](tagsets/semantic_classes.csv) – a list of hyperonym semantic classes which were used in the simplified version of the format
 - [UD Morphology tagset](https://github.com/dialogue-evaluation/GramEval2020/blob/master/UDtagset/UD-Russian_tagset.md) - UD morphological tagset: PoS-tags and grammatical features (the link is provided for the tagset published in GramEval-2020 competition) 
 - [UD Dependency relations (syntax)](tagsets/syntax.md) - UD dependency relations
+- [Full information about the dataset and its format](https://github.com/compreno-semantics)
 - [Acknowledgements](acknowledgements.md) – project participants
 
 ## Timeline:
