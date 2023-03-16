@@ -84,7 +84,7 @@ The details about the dataset and its creation can be read in the [corpus reposi
 ## Timeline:
 - 20 January - train dataset is published;
 - 6 February - test dataset and CodaLab is published;
-- 20 March - shared task deadline, results publication;
+- 28 March - shared task deadline, results publication;
 - 1 April - paper submission deadline.
 
 ## Organizers
