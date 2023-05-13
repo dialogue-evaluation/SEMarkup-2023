@@ -141,7 +141,7 @@ class DependencyClassifier(Model):
         s_arc = s_arc.cpu()
         s_rel = s_rel.cpu()
 
-        # It is the most tricky logic of dependency classifier.
+        # It is the most tricky part of dependency classifier.
         # If you want to get into it, first visit
         # https://docs.allennlp.org/main/api/nn/chu_liu_edmonds
         # It is not that detailed, so you better look into the source.

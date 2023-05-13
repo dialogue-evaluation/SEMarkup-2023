@@ -27,6 +27,9 @@ class LemmaRule:
                f"append_suffix={self.append_suffix}"
 
 
+DEFAULT_LEMMA_RULE = LemmaRule()
+
+
 def predict_lemma_rule(word: str, lemma: str) -> LemmaRule:
     """
     Predict lemmatization rule given word and its lemma.
