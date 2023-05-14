@@ -42,7 +42,17 @@
         "lemma_rule_classifier": {
             "hid_dim": 256,
             "activation": "relu",
-            "dropout": 0.1
+            "dropout": 0.0,
+            "dictionaries": [
+                {
+                    "path": "dicts/ComprenoFull.txt",
+                    "lemma_match_pattern": "\d+:(.*)"
+                },
+                {
+                    "path": "dicts/Zaliz.txt",
+                    "lemma_match_pattern": "^(.*?) "
+                },
+            ]
         },
         "pos_feats_classifier": {
             "hid_dim": 256,

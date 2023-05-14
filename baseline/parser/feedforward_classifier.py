@@ -1,5 +1,5 @@
 from overrides import override
-from typing import Dict
+from typing import Dict, List
 
 import re
 
@@ -7,12 +7,12 @@ import torch
 from torch import nn
 from torch import Tensor
 
-from allennlp.data import Vocabulary
+from allennlp.data.vocabulary import Vocabulary, DEFAULT_OOV_TOKEN
 from allennlp.models import Model
 from allennlp.nn.activations import Activation
 from allennlp.training.metrics import CategoricalAccuracy
 
-from parser.lemmatize_helper import LemmaRule, predict_lemma_from_rule, DEFAULT_LEMMA_RULE
+from parser.lemmatize_helper import LemmaRule, predict_lemma_from_rule, normalize, DEFAULT_LEMMA_RULE
 
 
 @Model.register('feed_forward_classifier')
@@ -78,15 +78,18 @@ class LemmaClassifier(FeedForwardClassifier):
                  n_classes: int,
                  activation: str,
                  dropout: float,
-                 dictionary_path: str):
+                 dictionaries: List[Dict[str, str]] = []):
         super().__init__(vocab, in_dim, hid_dim, n_classes, activation, dropout)
 
-        with open(dictionary_path, 'r') as f:
-            filetext = f.read()
-            dictionary = re.findall("\d+:(.*)", filetext)
-            dictionary = set(dictionary)
-        self.dictionary = dictionary
-        print(f"dictionary size: {len(self.dictionary)}")
+        self.dictionary = set()
+        for dictionary_info in dictionaries:
+            dictionary_path = dictionary_info["path"]
+            lemma_match_pattern = dictionary_info["lemma_match_pattern"]
+            with open(dictionary_path, 'r') as f:
+                txt = f.read()
+                lemmas = re.findall(lemma_match_pattern, txt, re.MULTILINE)
+                lemmas = set(map(normalize, lemmas))
+            self.dictionary |= lemmas
 
     @override
     def forward(self,
@@ -99,37 +102,55 @@ class LemmaClassifier(FeedForwardClassifier):
         output = super().forward(embeddings, labels, mask)
         logits, preds, loss = output['logits'], output['preds'], output['loss']
 
-        # While at inference, try to avoid malformed lemmas using external dictionary.
-        if not self.training:
+        # While at inference, try to avoid malformed lemmas using external dictionary (if provided).
+        if not self.training and self.dictionary:
             # Find top most confident lemma rules for each token.
-            top_rules = torch.topk(logits, k=TOPK_RULES, dim=-1).indices
+            probs = torch.nn.functional.softmax(logits, dim=-1)
+            top_rules = torch.topk(probs, k=LemmaClassifier.TOPK_RULES, dim=-1).indices.cpu().numpy()
 
             for i in range(len(metadata)):
                 tokens = metadata[i]
                 tokens_top_rules = top_rules[i]
+
                 for j in range(len(tokens)):
-                    word = words[j]
-                    word_top_rules = tokens_top_rules[j]
-                    # Find the first correct lemma (i.e. a lemma within the dictionary) for the word.
-                    for lemma_rule_id in word_top_rules:
+                    token = str(tokens[j])
+                    token_top_rules = tokens_top_rules[j]
+
+                    # Lemmatizer usually does well with titles (e.g. 'Вася')
+                    # and different kind of dates (like '70-е')
+                    # so don't correct the predictions in that case.
+                    is_title = lambda word: word[0].isupper()
+                    contains_digit = lambda word: any(char.isdigit() for char in word)
+                    if is_title(token) or contains_digit(token):
+                        continue
+
+                    # Find the most probable correct lemma for the word.
+                    better_lemma_found = False
+                    for lemma_rule_id in token_top_rules:
                         lemma_rule_str = self.vocab.get_token_from_index(lemma_rule_id, "lemma_rule_labels")
 
-                        # If the most confident lemma rule is "unknown rule",
-                        # then there is no sense in looking for better lemma.
+                        # If the current most confident lemma rule is "unknown rule",
+                        # then lemmatizer has no idea how to lemmatize the token, so interrupt lookup.
                         if lemma_rule_str == DEFAULT_OOV_TOKEN:
-                            break
-                        # There are also non-dictionary tokens like digits, punctuation, etc.
-                        # In such cases we don't want to look for dictionary lemma.
-                        if lemma_rule_str == DEFAULT_LEMMA_RULE:
+                            better_lemma_found = True
                             break
 
                         lemma_rule = LemmaRule.from_str(lemma_rule_str)
-                        lemma = predict_lemma_from_rule(word, lemma_rule)
-                        if lemma in self.dictionary:
+
+                        # There are non-dictionary tokens like digits, punctuation, etc.
+                        # In such cases we don't want to check up the dictionary.
+                        if lemma_rule == DEFAULT_LEMMA_RULE:
+                            better_lemma_found = True
+                            break
+
+                        lemma = predict_lemma_from_rule(str(token), lemma_rule)
+                        if lemma.lower() in self.dictionary:
+                            better_lemma_found = True
                             break
 
                     # Update predictions with the better lemma.
-                    preds[i][j] = lemma_rule_id
+                    if better_lemma_found:
+                        preds[i][j] = lemma_rule_id
 
         return {'preds': preds, 'loss': loss}
 
