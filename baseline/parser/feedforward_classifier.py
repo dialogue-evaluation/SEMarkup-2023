@@ -2,6 +2,7 @@ from overrides import override
 from typing import Dict, List
 
 import re
+import string
 
 import torch
 from torch import nn
@@ -70,6 +71,7 @@ class LemmaClassifier(FeedForwardClassifier):
     """
 
     TOPK_RULES = 5
+    PUNCTUATION = set(string.punctuation)
 
     def __init__(self,
                  vocab: Vocabulary,
@@ -79,6 +81,7 @@ class LemmaClassifier(FeedForwardClassifier):
                  activation: str,
                  dropout: float,
                  dictionaries: List[Dict[str, str]] = []):
+
         super().__init__(vocab, in_dim, hid_dim, n_classes, activation, dropout)
 
         self.dictionary = set()
@@ -119,9 +122,10 @@ class LemmaClassifier(FeedForwardClassifier):
                     # Lemmatizer usually does well with titles (e.g. 'Вася')
                     # and different kind of dates (like '70-е')
                     # so don't correct the predictions in that case.
+                    is_punctuation = lambda word: word in LemmaClassifier.PUNCTUATION
                     is_title = lambda word: word[0].isupper()
                     contains_digit = lambda word: any(char.isdigit() for char in word)
-                    if is_title(token) or contains_digit(token):
+                    if is_punctuation(token) or is_title(token) or contains_digit(token):
                         continue
 
                     # Find the most probable correct lemma for the word.
@@ -132,19 +136,11 @@ class LemmaClassifier(FeedForwardClassifier):
                         # If the current most confident lemma rule is "unknown rule",
                         # then lemmatizer has no idea how to lemmatize the token, so interrupt lookup.
                         if lemma_rule_str == DEFAULT_OOV_TOKEN:
-                            better_lemma_found = True
-                            break
+                            continue
 
                         lemma_rule = LemmaRule.from_str(lemma_rule_str)
-
-                        # There are non-dictionary tokens like digits, punctuation, etc.
-                        # In such cases we don't want to check up the dictionary.
-                        if lemma_rule == DEFAULT_LEMMA_RULE:
-                            better_lemma_found = True
-                            break
-
-                        lemma = predict_lemma_from_rule(str(token), lemma_rule)
-                        if lemma.lower() in self.dictionary:
+                        lemma = predict_lemma_from_rule(token, lemma_rule)
+                        if normalize(lemma) in self.dictionary:
                             better_lemma_found = True
                             break
 
