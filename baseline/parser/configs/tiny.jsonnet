@@ -46,7 +46,7 @@
             "dictionaries": [
                 {
                     "path": "dicts/ComprenoFull.txt",
-                    "lemma_match_pattern": "\d+:(.*)"
+                    "lemma_match_pattern": "\\d+:(.*)"
                 },
                 {
                     "path": "dicts/Zaliz.txt",
