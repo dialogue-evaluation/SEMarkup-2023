@@ -39,7 +39,7 @@
         "lemma_rule_classifier": {
             "hid_dim": 512,
             "activation": "relu",
-            "dropout": 0.0,
+            "dropout": 0.1,
             "dictionaries": [
                 {
                     "path": "dicts/ComprenoFull.txt",
