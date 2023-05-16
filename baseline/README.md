@@ -65,7 +65,7 @@ We use AllenNLP command line tools for training, validating and testing. Once ag
 ### Train
 
 ```
-allennlp train parser/configs/tiny.jsonnet \
+allennlp train parser/configs/rubert-tiny2.jsonnet \
     --serialization-dir serialization_dir \
     --include-package parser
 ```

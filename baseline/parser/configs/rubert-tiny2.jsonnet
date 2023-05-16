@@ -8,7 +8,7 @@
         "token_indexers": {
             "tokens": {
                 "type": "pretrained_transformer_mismatched",
-                "model_name": "cointegrated/rubert-tiny"
+                "model_name": "cointegrated/rubert-tiny2" # Use rubert-tiny2. If you change it, don't forget to change model.embedder.model_name as well.
             }
         },
     },
@@ -33,7 +33,7 @@
         "type": "morpho_syntax_semantic_parser", # Use custom model.
         "embedder": {
             "type": "pretrained_transformer_mismatched",
-            "model_name": "cointegrated/rubert-tiny", # Use rubert-tiny.
+            "model_name": "cointegrated/rubert-tiny2",
             "train_parameters": true
         },
         "lemma_rule_classifier": {
