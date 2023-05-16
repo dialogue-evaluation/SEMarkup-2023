@@ -57,7 +57,7 @@
             "dropout": 0.1
         },
         "depencency_classifier": {
-            "hid_dim": 512,
+            "hid_dim": 128,
             "activation": "relu",
             "dropout": 0.1
         },
