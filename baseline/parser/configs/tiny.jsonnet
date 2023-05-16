@@ -21,9 +21,6 @@
         "shuffle": false
     },
     "vocabulary": {
-        "min_count": {
-            "lemma_rule_labels": 3 # Ignore rules encountered two (or less) times in dataset. Such rules are marked as OOV.
-        },
         "tokens_to_add": { # Add default OOV tokens to string-based fields.
             "lemma_rule_labels": ["@@UNKNOWN@@"],
             "pos_feats_labels": ["@@UNKNOWN@@"],
@@ -40,7 +37,7 @@
             "train_parameters": true
         },
         "lemma_rule_classifier": {
-            "hid_dim": 256,
+            "hid_dim": 512,
             "activation": "relu",
             "dropout": 0.0,
             "dictionaries": [
