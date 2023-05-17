@@ -90,16 +90,15 @@ The details about the dataset and its creation can be read in the [corpus reposi
 - [Full information about the dataset and its format](https://github.com/compreno-semantics)
 - [Acknowledgements](acknowledgements.md) – project participants
 
-## Conversion paper
-Please refer to this paper if you use our conversion materials
+## Compreno to UD conversion paper
+
+Please refer to this paper if you mention the ICA conversion (Compreno to UD) in your work
 ```
-@inproceedings{Ivoylova2023,
-  year = {2023},
-  author = {Alexandra Ivoylova, Darya Dyachkova, Maria Petrova, Mariia Michurina},
-  title = {The problem of linguistic markup conversion: the transformation of the Compreno markup into the UD format},
-  booktitle = {Computational Linguistics and Intellectual Technologies}
-}
+Ivoylova Alexandra, Dyachkova Darya, Petrova Maria, Michurina Mariia. 2023.
+The problem of linguistic markup conversion: the transformation of the Compreno
+markup into the UD format // Computational Linguistics and Intellectual Technologies
 ```
+
 
 ## Timeline:
 - 20 January - train dataset is published;
