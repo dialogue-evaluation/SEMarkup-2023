@@ -93,7 +93,7 @@ The details about the dataset and its creation can be read in the [corpus reposi
 ## Conversion paper
 Please refer to this paper if you use our conversion materials
 ```
-@inproceedings{Petrova2023,
+@inproceedings{Ivoylova2023,
   year = {2023},
   author = {Alexandra Ivoylova, Darya Dyachkova, Maria Petrova, Mariia Michurina},
   title = {The problem of linguistic markup conversion: the transformation of the Compreno markup into the UD format},
