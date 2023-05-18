@@ -70,7 +70,6 @@ class LemmaClassifier(FeedForwardClassifier):
     FeedForwardClassifier specialization for lemma classification.
     """
 
-    TOPK_RULES = 5
     PUNCTUATION = set(string.punctuation)
 
     def __init__(self,
@@ -80,7 +79,8 @@ class LemmaClassifier(FeedForwardClassifier):
                  n_classes: int,
                  activation: str,
                  dropout: float,
-                 dictionaries: List[Dict[str, str]] = []):
+                 dictionaries: List[Dict[str, str]] = [],
+                 topk: int = None):
 
         super().__init__(vocab, in_dim, hid_dim, n_classes, activation, dropout)
 
@@ -93,6 +93,15 @@ class LemmaClassifier(FeedForwardClassifier):
                 lemmas = re.findall(lemma_match_pattern, txt, re.MULTILINE)
                 lemmas = set(map(normalize, lemmas))
             self.dictionary |= lemmas
+
+        # If dictionary is given, topk must be set as well and vise versa.
+        if self.dictionary:
+            assert(topk is not None)
+        else:
+            assert(topk is None)
+        assert(topk >= 1)
+        self.topk = topk
+
 
     @override
     def forward(self,
@@ -109,7 +118,7 @@ class LemmaClassifier(FeedForwardClassifier):
         if not self.training and self.dictionary:
             # Find top most confident lemma rules for each token.
             probs = torch.nn.functional.softmax(logits, dim=-1)
-            top_rules = torch.topk(probs, k=LemmaClassifier.TOPK_RULES, dim=-1).indices.cpu().numpy()
+            top_rules = torch.topk(probs, k=self.topk, dim=-1).indices.cpu().numpy()
 
             for i in range(len(metadata)):
                 tokens = metadata[i]
