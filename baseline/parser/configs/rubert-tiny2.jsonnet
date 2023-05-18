@@ -49,7 +49,12 @@
                     "path": "dicts/Zaliz.txt",
                     "lemma_match_pattern": "^(.*?) "
                 },
-            ]
+                { # TODO: There should be a task-independent dictionary with pronouns.
+                    "path": "data/train.conllu",
+                    "lemma_match_pattern": "^\\d+\\s+.*?\\s+(.*?)\\s+"
+                },
+            ],
+            "topk": 5,
         },
         "pos_feats_classifier": {
             "hid_dim": 256,
