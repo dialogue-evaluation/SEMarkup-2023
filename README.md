@@ -11,10 +11,19 @@ The shared task contains 2 tracks:
 - base ([Codalab](https://codalab.lisn.upsaclay.fr/competitions/10472)): create a solution that would produce a **semantic markup** with a dependency head (using the morphosyntactic markup, if possible).
 - hard ([Codalab](https://codalab.lisn.upsaclay.fr/competitions/10471)): create a solution that would produce a **simultaneous morpho-, syntactic and semantic markup**.
 
-
 Both tracks imply, among other things, the solution of the All-words WSD problem - disambiguation for all polysemous words (homonyms), as participants have to assign semantic classes to all words. <br />
 The presence of morphosyntactic markup in the training dataset makes it possible to take these data into account and, in addition, to find out the connection between different levels of markup.
 
+## Citing
+Please refer to this paper if you use our dataset
+```
+@inproceedings{Petrova2023,
+  year = {2023},
+  author = {Maria Petrova, Alexandra Ivoylova, Ilya Bayuk, Darya Dyachkova, Mariia Michurina},
+  title = {The ICA Project: the Creation and Application of the full Morpho-Syntactic and Semantic Markup Standard},
+  booktitle = {Computational Linguistics and Intellectual Technologies}
+}
+```
 
 ## Markup example
 
@@ -66,7 +75,7 @@ As the train dataset we suggest using the first open [corpus](https://github.com
 
 We believe that simultaneous markup of these three language levels is a challenge even more complicated than [Dialogue GramEval-2020 competition](https://github.com/dialogue-evaluation/GramEval2020), where 2 language levels were introduced, morphology and syntax.
 <br />
-The details about the dataset and its creation can be read in the [corpus repository](https://github.com/compreno-semantics/compreno-corpus). 
+The details about the dataset and its creation can be read in the [corpus repository](https://github.com/compreno-semantics/compreno-corpus).
 
 ## Important links
 - [Codalab BASE track](https://codalab.lisn.upsaclay.fr/competitions/10472)
@@ -80,6 +89,16 @@ The details about the dataset and its creation can be read in the [corpus reposi
 - [UD Dependency relations (syntax)](tagsets/syntax.md) - UD dependency relations
 - [Full information about the dataset and its format](https://github.com/compreno-semantics)
 - [Acknowledgements](acknowledgements.md) – project participants
+
+## Compreno to UD conversion paper
+
+Please refer to this paper if you mention the ICA conversion (Compreno to UD) in your work
+```
+Ivoylova Alexandra, Dyachkova Darya, Petrova Maria, Michurina Mariia. 2023.
+The problem of linguistic markup conversion: the transformation of the Compreno
+markup into the UD format // Computational Linguistics and Intellectual Technologies
+```
+
 
 ## Timeline:
 - 20 January - train dataset is published;

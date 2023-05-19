@@ -4,6 +4,8 @@
 
 [Чат в телеграме](https://t.me/+58wXWNPgUt8yZDgy)
 
+<a href="https://creativecommons.org/licenses/by-nc/4.0/"><img src="https://img.shields.io/static/v1?label=license&message=CC-BY-NC-4.0&color=green"/></a>
+
 ## Обзор
 
 Соревнование содержит 2 дорожки:
@@ -12,6 +14,17 @@
 
 Обе дорожки подразумевают в том числе решение задачи All-words WSD &ndash; разрешения омонимии для всех многозначных слов, так как участники должны приписать семантические классы всем словам.<br />
 Наличие морфосинтаксической разметки в обучающем датасете позволит учитывать эти данные и в перспективе выяснить взаимосвязь разных уровней разметки.
+
+## Цитирование
+Ссылка на публикацию при использовании корпуса:
+```
+@inproceedings{Petrova2023,
+  year = {2023},
+  author = {Maria Petrova, Alexandra Ivoylova, Ilya Bayuk, Darya Dyachkova, Mariia Michurina},
+  title = {The ICA Project: the Creation and Application of the full Morpho-Syntactic and Semantic Markup Standard},
+  booktitle = {Computational Linguistics and Intellectual Technologies}
+}
+```
 
 ## Пример разметки
 
@@ -69,6 +82,17 @@
 - [UD Dependency relations (syntax)](tagsets/syntax.md) &ndash; синтаксические связи UD
 - [Полное описание датасета и его формата]https://github.com/compreno-semantics
 - [Acknowledgements](acknowledgements.md) – участники проекта
+
+## Статья по корвертации
+Ссылка на публикацию по конвертации корпуса:
+```
+@inproceedings{Ivoylova2023,
+  year = {2023},
+  author = {Alexandra Ivoylova, Darya Dyachkova, Maria Petrova, Mariia Michurina},
+  title = {The problem of linguistic markup conversion: the transformation of the Compreno markup into the UD format},
+  booktitle = {Computational Linguistics and Intellectual Technologies}
+}
+```
 
 ## График проведения соревнования:
 
