@@ -1,4 +1,4 @@
-# Configuration file for parser.
+# Configuration file for baseline model.
 # See https://guide.allennlp.org/training-and-prediction#2 for guidance.
 {
     "train_data_path": "data/train.conllu",
@@ -8,7 +8,7 @@
         "token_indexers": {
             "tokens": {
                 "type": "pretrained_transformer_mismatched",
-                "model_name": "cointegrated/rubert-tiny2" # Use rubert-tiny2. If you change it, don't forget to change model.embedder.model_name as well.
+                "model_name": "cointegrated/rubert-tiny" # Use rubert-tiny.
             }
         },
     },
@@ -33,28 +33,13 @@
         "type": "morpho_syntax_semantic_parser", # Use custom model.
         "embedder": {
             "type": "pretrained_transformer_mismatched",
-            "model_name": "cointegrated/rubert-tiny2",
+            "model_name": "cointegrated/rubert-tiny",
             "train_parameters": true
         },
         "lemma_rule_classifier": {
             "hid_dim": 512,
             "activation": "relu",
             "dropout": 0.1,
-            "dictionaries": [
-                {
-                    "path": "dicts/ComprenoFull.txt",
-                    "lemma_match_pattern": "\\d+:(.*)"
-                },
-                {
-                    "path": "dicts/Zaliz.txt",
-                    "lemma_match_pattern": "^(.*?) "
-                },
-                { # TODO: There should be a task-independent dictionary with pronouns.
-                    "path": "data/train.conllu",
-                    "lemma_match_pattern": "^\\d+\\s+.*?\\s+(.*?)\\s+"
-                },
-            ],
-            "topk": 5,
         },
         "pos_feats_classifier": {
             "hid_dim": 256,

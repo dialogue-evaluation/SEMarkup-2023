@@ -13,7 +13,7 @@ from allennlp.models import Model
 from allennlp.nn.activations import Activation
 from allennlp.training.metrics import CategoricalAccuracy
 
-from parser.lemmatize_helper import LemmaRule, predict_lemma_from_rule, normalize, DEFAULT_LEMMA_RULE
+from .lemmatize_helper import LemmaRule, predict_lemma_from_rule, normalize, DEFAULT_LEMMA_RULE
 
 
 @Model.register('feed_forward_classifier')
@@ -96,12 +96,10 @@ class LemmaClassifier(FeedForwardClassifier):
 
         # If dictionary is given, topk must be set as well and vise versa.
         if self.dictionary:
-            assert(topk is not None)
+            assert(topk is not None and topk >= 1)
         else:
             assert(topk is None)
-        assert(topk >= 1)
         self.topk = topk
-
 
     @override
     def forward(self,
@@ -114,7 +112,7 @@ class LemmaClassifier(FeedForwardClassifier):
         output = super().forward(embeddings, labels, mask)
         logits, preds, loss = output['logits'], output['preds'], output['loss']
 
-        # While at inference, try to avoid malformed lemmas using external dictionary (if provided).
+        # During the inference try to avoid malformed lemmas using external dictionary (if provided).
         if not self.training and self.dictionary:
             # Find top most confident lemma rules for each token.
             probs = torch.nn.functional.softmax(logits, dim=-1)

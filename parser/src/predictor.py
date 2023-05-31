@@ -1,12 +1,11 @@
-from overrides import override
+from conllu.models import Token, TokenList
 
+from overrides import override
 from typing import Dict
 
 from allennlp.predictors.predictor import Predictor
 from allennlp.common.util import JsonDict
 from allennlp.data import Instance
-
-from conllu.models import Token, TokenList
 
 
 @Predictor.register("morpho_syntax_semantic_predictor")
