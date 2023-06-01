@@ -3,7 +3,7 @@
 ## Table of Contents
 1. [Base model](#base-model)
 2. [Base model modifications](#base-model-modifications)
-    1. [Top-k dictionary lemma]()
+    1. [Top-k dictionary lemma](#top-k-dictionary-lemmatization)
     2. _In progress_
 3. [Training notes](#training-notes)
 
@@ -95,7 +95,7 @@ We suggest setting $k$ to 5 or 10.
 
 #### Dictionary
 
-We haven't found a complete dictionary of Russian lemmas (which is to be compatible with SEMarkup), so we made it ourselves. We manually merged three dictionaries:
+We didn't find a complete dictionary of Russian lemmas (which is to be compatible with SEMarkup), so we made it ourselves. We manually merged three dictionaries:
 
 * Compreno dictionary (_~210k lemmas_),
 * Zaliznyak dictionary (_+13.3k lemmas_) to add verb aspects and reflexives,
@@ -116,6 +116,6 @@ The configuration file for rubert-tiny2 with top-k lemma search: [topk-lemma.jso
 
 ## Training notes
 
-The models are trained in a multi-task manner, i.e. each head has its own loss, and the resulting loss is the sum of the losses. Also, we use slanted triangular learning rate scheduler along with gradual unfreezing and discriminative fine-tuning. 
+The models are trained in a multi-task manner, i.e. each head has its own loss, and the resulting loss is the sum of the losses. Also, we use slanted triangular learning rate scheduler along with gradual unfreezing and discriminative fine-tuning. See 
 
 We splitted the base dataset (*train.conllu*) into train and validation parts (using *misc/train_val_split.py* script) so that train is 80% and validation is 20% of the base dataset size.
