@@ -42,7 +42,7 @@
             "dropout": 0.1,
             "dictionaries": [
                 {
-                    "path": "dicts/ComprenoFull.txt",
+                    "path": "dicts/Compreno.txt",
                     "lemma_match_pattern": "\\d+:(.*)"
                 },
                 {
