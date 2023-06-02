@@ -27,6 +27,16 @@ class LemmaRule:
                f"append_suffix={self.append_suffix}"
 
 
+DEFAULT_LEMMA_RULE = LemmaRule()
+
+
+def normalize(word: str) -> str:
+    """
+    Normalize word: cast to lowercase and replace russian 'ё' with 'е'
+    """
+    return word.lower().replace('ё', 'е')
+
+
 def predict_lemma_rule(word: str, lemma: str) -> LemmaRule:
     """
     Predict lemmatization rule given word and its lemma.
@@ -34,8 +44,8 @@ def predict_lemma_rule(word: str, lemma: str) -> LemmaRule:
     >>> predict_lemma_rule("сек.", "секунда")
     LemmaRule(cut_prefix=0, cut_suffix=1, append_suffix='унда')
     """
-    word = word.lower().replace('ё', 'е')
-    lemma = lemma.lower().replace('ё', 'е')
+    word = normalize(word)
+    lemma = normalize(lemma)
 
     match = SequenceMatcher(None, word, lemma).find_longest_match(0, len(word), 0, len(lemma))
 

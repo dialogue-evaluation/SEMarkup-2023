@@ -7,7 +7,7 @@ from allennlp.data.fields import TextField, SequenceLabelField, MetadataField
 from allennlp.data.token_indexers import SingleIdTokenIndexer, TokenIndexer
 from allennlp.data.tokenizers import Token
 
-from parser.lemmatize_helper import predict_lemma_rule
+from .lemmatize_helper import predict_lemma_rule
 
 
 class Sentence:

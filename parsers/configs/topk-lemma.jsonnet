@@ -8,7 +8,7 @@
         "token_indexers": {
             "tokens": {
                 "type": "pretrained_transformer_mismatched",
-                "model_name": "cointegrated/rubert-tiny"
+                "model_name": "cointegrated/rubert-tiny2" # Use rubert-tiny2. If you change it, don't forget to change model.embedder.model_name as well.
             }
         },
     },
@@ -21,9 +21,6 @@
         "shuffle": false
     },
     "vocabulary": {
-        "min_count": {
-            "lemma_rule_labels": 3 # Ignore rules encountered two (or less) times in dataset. Such rules are marked as OOV.
-        },
         "tokens_to_add": { # Add default OOV tokens to string-based fields.
             "lemma_rule_labels": ["@@UNKNOWN@@"],
             "pos_feats_labels": ["@@UNKNOWN@@"],
@@ -36,13 +33,28 @@
         "type": "morpho_syntax_semantic_parser", # Use custom model.
         "embedder": {
             "type": "pretrained_transformer_mismatched",
-            "model_name": "cointegrated/rubert-tiny", # Use rubert-tiny.
+            "model_name": "cointegrated/rubert-tiny2",
             "train_parameters": true
         },
         "lemma_rule_classifier": {
-            "hid_dim": 256,
+            "hid_dim": 512,
             "activation": "relu",
-            "dropout": 0.1
+            "dropout": 0.1,
+            "dictionaries": [
+                {
+                    "path": "dicts/Compreno.txt",
+                    "lemma_match_pattern": "\\d+:(.*)"
+                },
+                {
+                    "path": "dicts/Zaliz.txt",
+                    "lemma_match_pattern": "^(.*?) "
+                },
+                { # TODO: There should be a task-independent dictionary with pronouns.
+                    "path": "data/train.conllu",
+                    "lemma_match_pattern": "^\\d+\\s+.*?\\s+(.*?)\\s+"
+                },
+            ],
+            "topk": 10,
         },
         "pos_feats_classifier": {
             "hid_dim": 256,
@@ -50,7 +62,7 @@
             "dropout": 0.1
         },
         "depencency_classifier": {
-            "hid_dim": 512,
+            "hid_dim": 128,
             "activation": "relu",
             "dropout": 0.1
         },

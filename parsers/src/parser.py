@@ -12,10 +12,9 @@ from allennlp.data.vocabulary import Vocabulary, DEFAULT_OOV_TOKEN
 from allennlp.models import Model
 from allennlp.modules.token_embedders.token_embedder import TokenEmbedder
 
-from parser.feedforward_classifier import FeedForwardClassifier
-from parser.dependency_classifier import DependencyClassifier
-
-from parser.lemmatize_helper import LemmaRule, predict_lemma_from_rule
+from .feedforward_classifier import FeedForwardClassifier, LemmaClassifier
+from .dependency_classifier import DependencyClassifier
+from .lemmatize_helper import LemmaRule, predict_lemma_from_rule
 
 
 @Model.register('morpho_syntax_semantic_parser')
@@ -31,7 +30,7 @@ class MorphoSyntaxSemanticParser(Model):
     def __init__(self,
                  vocab: Vocabulary,
                  embedder: TokenEmbedder,
-                 lemma_rule_classifier: Lazy[FeedForwardClassifier],
+                 lemma_rule_classifier: Lazy[LemmaClassifier],
                  pos_feats_classifier: Lazy[FeedForwardClassifier],
                  depencency_classifier: Lazy[DependencyClassifier],
                  semslot_classifier: Lazy[FeedForwardClassifier],
@@ -79,7 +78,7 @@ class MorphoSyntaxSemanticParser(Model):
         # [batch_size, seq_len]
         mask = get_text_field_mask(words)
 
-        lemma_rule = self.lemma_rule_classifier(embeddings, lemma_rule_labels, mask)
+        lemma_rule = self.lemma_rule_classifier(embeddings, lemma_rule_labels, mask, metadata)
         pos_feats = self.pos_feats_classifier(embeddings, pos_feats_labels, mask)
         syntax = self.dependency_classifier(embeddings, head_labels, deprel_labels, mask)
         semslot = self.semslot_classifier(embeddings, semslot_labels, mask)
