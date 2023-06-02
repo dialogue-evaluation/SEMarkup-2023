@@ -10,14 +10,14 @@ If you are interested in configuration details like batch size, learning rate, s
 
 ### Setup
 
-First, install dependencies listed in requirements.txt. You can do it manually or via the following commands:
+First, install dependencies listed in _requirements.txt_. You can do it manually or via the following commands:
 ```
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Next, split the main dataset into train and validation parts which shall be placed in _data_ directory:
+Next, prepare train and validation datasets via (they shall be placed in _data_ directory):
 ```
 cd misc
 ./prepare_train_val_data.sh
