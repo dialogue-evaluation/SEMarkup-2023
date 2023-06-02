@@ -97,11 +97,13 @@ We suggest setting $k$ to 5 or 10.
 
 We didn't find a complete dictionary of Russian lemmas (which is to be compatible with SEMarkup), so we made it ourselves. We manually merged three dictionaries:
 
-* Compreno dictionary (_~210k lemmas_),
-* Zaliznyak dictionary (_+13.3k lemmas_) to add verb aspects and reflexives,
+* Compreno dictionary (_~210k lemmas_) \*,
+* Zaliznyak dictionary (_+13.3k lemmas_) to add verb aspects and reflexives \*,
 * Train dataset (_+6.8k lemmas_) to account for pronouns and mics. words,
 
 The resulting dictionary has a size of _~231k_ lemmas.
+
+\* The dictionaries can be downloaded via `misc/download_dictionaries.sh` script. 
 
 ### Quality
 
