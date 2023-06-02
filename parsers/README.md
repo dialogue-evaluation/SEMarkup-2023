@@ -8,18 +8,37 @@ If you are interested in configuration details like batch size, learning rate, s
 
 ## Usage
 
+### Setup
+
+First, install dependencies listed in requirements.txt. You can do it manually or via the following commands:
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Next, split the main dataset into train and validation parts which shall be placed in _data_ directory:
+```
+cd misc
+./prepare_train_val_data.sh
+```
+
+Now you are ready to train some models.
+
+### Run
+
 The models are implemented using [AllenNLP](https://github.com/allenai/allennlp) framework, so if you want to build your own model based on this code, we hightly recommend reading [AllenNLP guide](https://guide.allennlp.org/) first.
 
 We use AllenNLP command line tools to train and evaluate parsers. Run `allennlp --help` for details.
 
-### Train
+#### Train
 ```
 allennlp train configs/baseline.jsonnet \
     --serialization-dir serialization_dir \
     --include-package src
 ```
 
-### Predict
+#### Predict
 ```
 allennlp predict serialization_dir/model.tar.gz train.conllu \
     --output-file predictions.txt \
